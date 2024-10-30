@@ -7,9 +7,9 @@ services:
     ports:
       - "27017:27017"
     environment:
-      MONGO_INITDB_ROOT_USERNAME: your_user
-      MONGO_INITDB_ROOT_PASSWORD: your_password
-      MONGO_INITDB_DATABASE: your_database_name  # Set the database name here
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: mypassword
+      MONGO_INITDB_DATABASE: mongodb # Set the database name here
     volumes:
       - mongodb_data:/data/db
 
@@ -22,12 +22,13 @@ services:
     depends_on:
       - mongodb
     environment:
-      DATABASE_URL: mongodb://your_user:your_password@mongodb:27017/your_database_name
+      DATABASE_URL: mongodb://admin:mypassword@mongodb:27017/mongodb
       API_ID: 2753868                                                        # Your Telegram API ID
       API_HASH: ab6ec1d5a69f52224f558f6295576614                             # Your Telegram API Hash
       BOT_TOKEN: 6075501282:AAEvhoTJbddTd1sBRNxanJhU9kLVUi7aADU                                              # Your Bot Token
       OWNER_ID: 5809046691                                                   # Your Telegram User ID
-      BIN_CHANNEL: -1002296343174                                          # ID of your Bin / Log Channel
+      BIN_CHANNEL: -1002296343174                                              # ID of your Bin / Log Channel
+      NEW_USER_LOG: 0
       UPDATES_CHANNEL: FileStreameChannel        # Username of your Update Channel without '@'
       WORKERS: 3                                   # Maximum concurrent workers
       PORT: 8080                                   # Port your web app listens to
