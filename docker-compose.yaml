@@ -17,7 +17,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: file_streame_bot
+    container_name: File_Stream_Bot
     command: python3 -m biisal
     depends_on:
       - mongodb
