@@ -1,0 +1,42 @@
+version: "3.8"
+
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: mongo_db
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: your_user
+      MONGO_INITDB_ROOT_PASSWORD: your_password
+      MONGO_INITDB_DATABASE: your_database_name  # Set the database name here
+    volumes:
+      - mongodb_data:/data/db
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: file_streame_bot
+    command: python3 -m biisal
+    depends_on:
+      - mongodb
+    environment:
+      DATABASE_URL: mongodb://your_user:your_password@mongodb:27017/your_database_name
+      API_ID: 2753868                                                        # Your Telegram API ID
+      API_HASH: ab6ec1d5a69f52224f558f6295576614                             # Your Telegram API Hash
+      BOT_TOKEN: 6075501282:AAEvhoTJbddTd1sBRNxanJhU9kLVUi7aADU                                              # Your Bot Token
+      OWNER_ID: 5809046691                                                   # Your Telegram User ID
+      BIN_CHANNEL: -1002296343174                                          # ID of your Bin / Log Channel
+      UPDATES_CHANNEL: FileStreameChannel        # Username of your Update Channel without '@'
+      WORKERS: 3                                   # Maximum concurrent workers
+      PORT: 8080                                   # Port your web app listens to
+      WEB_SERVER_BIND_ADDRESS: 0.0.0.0            # Your server bind address
+      NO_PORT: "false"                             # Set to true if you don't want your port displayed
+      FQDN: your_fqdn                             # Fully Qualified Domain Name
+      BANNED_CHANNELS: ""          # IDs of banned channels separated by space
+    volumes:
+      - .:/app
+
+volumes:
+  mongodb_data:
