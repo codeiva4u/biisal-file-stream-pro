@@ -23,4 +23,4 @@ COPY . /app
 EXPOSE 8080
 
 # Run the application
-CMD ["python", "-m", "Adarsh"]
+CMD ["python", "-m", "biisal"]
